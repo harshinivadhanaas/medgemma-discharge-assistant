@@ -1,12 +1,17 @@
 import google.generativeai as genai
 import time
+import os
 
 def generate_discharge_summary(clinical_notes: str) -> dict:
     """Generate discharge summary using Gemini AI"""
     start_time = time.time()
     
-    API_KEY = "AIzaSyBX1EHU46q_w9zF0R5U8MBUGUtGqj-rr2I"
-    
+    # Get API key from environment variable or Streamlit secrets
+    try:
+        import streamlit as st
+        API_KEY = st.secrets.get("GEMINI_API_KEY")
+    except:
+        API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyCHDN_fSizB9pUU1euneD5g1LvsadD7sZU")  
     prompt = f"""You are an expert medical documentation assistant. Generate a comprehensive discharge summary based on these clinical notes.
 
 CLINICAL NOTES:
