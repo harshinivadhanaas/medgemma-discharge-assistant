@@ -36,7 +36,7 @@ Generate a structured discharge summary with these sections:
         return {
             'summary': response.text,
             'metadata': {
-                'model': 'gemini-1.5-flash-latest',
+                'model': 'gemini-2.5-flash-preview-04-17',
                 'processing_time': round(processing_time, 2),
                 'confidence': 0.95
             }
