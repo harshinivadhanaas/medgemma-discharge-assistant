@@ -1,6 +1,6 @@
 import time
 import os
-from google import genai
+import google.generativeai as genai
 
 def generate_discharge_summary(clinical_notes: str) -> dict:
     start_time = time.time()
@@ -27,10 +27,10 @@ Generate a structured discharge summary with these sections:
 **Warning signs:** [When to seek emergency care]"""
 
     try:
-        client = genai.Client(api_key=API_KEY)
-        response = client.models.generate_content(
-    model="gemini-1.5-flash-latest",
-    contents=prompt
+        genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
+response = model.generate_content(    model="gemini-1.5-flash-latest",
+    prompt
 )
         )
         processing_time = time.time() - start_time
