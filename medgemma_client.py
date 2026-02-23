@@ -1,3 +1,4 @@
+
 import time
 import os
 import google.generativeai as genai
@@ -29,7 +30,7 @@ Generate a structured discharge summary with these sections:
 
     try:
         genai.configure(api_key=API_KEY)
-       model = genai.GenerativeModel('gemini-2.5-flash-preview-04-17')
+        model = genai.GenerativeModel('gemini-2.5-flash-preview-04-17')
         response = model.generate_content(prompt)
         
         processing_time = time.time() - start_time
