@@ -4,13 +4,13 @@ import google.generativeai as genai
 
 def generate_discharge_summary(clinical_notes: str) -> dict:
     start_time = time.time()
-
+    
     try:
         import streamlit as st
         API_KEY = st.secrets["GEMINI_API_KEY"]
     except:
         API_KEY = os.environ.get("GEMINI_API_KEY", "")
-
+    
     prompt = f"""You are an expert medical documentation assistant. 
 Generate a comprehensive discharge summary based on these clinical notes.
 
@@ -18,6 +18,7 @@ CLINICAL NOTES:
 {clinical_notes}
 
 Generate a structured discharge summary with these sections:
+
 ### DISCHARGE SUMMARY
 **Patient:** [Extract patient demographics]
 **Diagnosis:** [Primary diagnosis]
@@ -28,16 +29,14 @@ Generate a structured discharge summary with these sections:
 
     try:
         genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash-latest')
-response = model.generate_content(    model="gemini-1.5-flash-latest",
-    prompt
-)
-        )
+        model = genai.GenerativeModel('gemini-1.5-flash-latest')
+        response = model.generate_content(prompt)
+        
         processing_time = time.time() - start_time
         return {
             'summary': response.text,
             'metadata': {
-                 model="gemini-1.5-flash-latest",,
+                'model': 'gemini-1.5-flash-latest',
                 'processing_time': round(processing_time, 2),
                 'confidence': 0.95
             }
